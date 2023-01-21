@@ -1,0 +1,8 @@
+Debug/*
+.cproject
+.project
+.settings/
+STM32F407VGTX_FLASH.ld
+STM32F407VGTX_RAM.ld
+STM32F407_Bare_metal.launch
+
