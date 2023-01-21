@@ -26,5 +26,6 @@
 int main(void)
 {
     /* Loop forever */
+	printf("STM32F407 Bare metal Kick start\n");
 	for(;;);
 }
