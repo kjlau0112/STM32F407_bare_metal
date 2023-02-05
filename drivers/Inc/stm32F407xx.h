@@ -5,6 +5,8 @@
  *      Author: User
  */
 
+#include<stdint.h>
+
 #ifndef INC_STM32F407XX_H_
 #define INC_STM32F407XX_H_
 #define __vo volatile
@@ -33,6 +35,7 @@
 #define GPIOH_BASEADDR 					        (AHB1PERIPH_BASEADDR + 0x1C00)
 #define GPIOI_BASEADDR 					        (AHB1PERIPH_BASEADDR + 0x2000)
 #define RCC_BASEADDR                            (AHB1PERIPH_BASEADDR + 0x3800)
+
 
 /*APB1 Bus peripheral */
 #define I2C1_BASEADDR						(APB1PERIPH_BASEADDR + 0x5400)
@@ -63,7 +66,7 @@
 #define GPIOG  				((GPIO_RegDef_t*)GPIOG_BASEADDR)
 #define GPIOH  				((GPIO_RegDef_t*)GPIOH_BASEADDR)
 #define GPIOI  				((GPIO_RegDef_t*)GPIOI_BASEADDR)
-
+#define RCC 				((RCC_RegDef_t*)RCC_BASEADDR)
 typedef struct
 {
 	__vo uint32_t MODER;                        /*!< GPIO port mode register,                    	Address offset: 0x00      */
@@ -77,7 +80,16 @@ typedef struct
 	__vo uint32_t AFR[2];					 /*!< AFR[0] : GPIO alternate function low register, AF[1] : GPIO alternate function high register    		Address offset: 0x20-0x24 */
 }GPIO_RegDef_t;
 
+
 /*
+ * GPIO_RegDef_t *gpioA =(GPIO_RegDef_t*) 0x40020000U;
+ *  0x40020000U is base address of GPIOA
+ *  gpioA -> OTYPER = value
+ *  is equivalent to *(0x40020000+ 0x04) = value
+ * /
+
+/
+ *
  * peripheral register definition structure for RCC
  */
 typedef struct
@@ -133,5 +145,10 @@ typedef struct
 #define GPIOH_PCLK_EN()		(RCC->AHB1ENR |= (1 << 7))
 #define GPIOI_PCLK_EN()		(RCC->AHB1ENR |= (1 << 8))
 
-/* GPIO_RegDef_t *gpioA =(GPIO_RegDef_t*) 0x40020000U; */
+
+#define ENABLE 				1
+#define DISABLE 			0
+#define SET 				ENABLE
+#define RESET 				DISABLE
+
 #endif /* INC_STM32F407XX_H_ */
